@@ -78,7 +78,7 @@ const createSlider = () => {
   imagesArea.style.display = 'none';
   const duration = document.getElementById('duration').value || 1000; //prb 2 (id spelling mistake)
   if (duration < 1000) {
-    alert('invalid slider duration');
+    alert('Please enter minimum 1000 as slider duration');
   } else {
     sliders.forEach(slide => {
       let item = document.createElement('div')
@@ -123,13 +123,13 @@ const changeSlide = (index) => {
 }
 
 searchBtn.addEventListener('click', function () {
+  toggleSpinner() // call toggleSpinner function
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
-  // toggleSpinner() // not working
   getImages(search.value)
-  // toggleSpinner()  // not working
   sliders.length = 0;
+  // toggleSpinner() // call toggleSpinner function
 })
 
 
