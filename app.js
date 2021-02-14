@@ -39,7 +39,7 @@ const getImages = (query) => {
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
-    .catch(err => console.log(err))
+    .catch(error => displayError(error))
 }
 
 let slideIndex = 0;
@@ -76,11 +76,12 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value || 1000; //prb 2 (id spelling mistake)
-  if (duration < 1000) {
-    alert('Please enter minimum 1000 as slider duration');
+  let duration = document.getElementById('duration').value || 1000; 
+  if (duration < 0) {
+        alert('Invalid input');
+        getImages(search.value);
   } else {
-    sliders.forEach(slide => {
+      sliders.forEach(slide => {
       let item = document.createElement('div')
       item.className = "slider-item";
       item.innerHTML = `<img class="w-100"
@@ -89,7 +90,7 @@ const createSlider = () => {
       sliderContainer.appendChild(item)
     })
     changeSlide(0)
-    timer = setInterval(function () {
+      timer = setInterval(function () {
       slideIndex++;
       changeSlide(slideIndex);
     }, duration);
@@ -141,4 +142,10 @@ sliderBtn.addEventListener('click', function () {
 const toggleSpinner = () => {
   const spinner = document.getElementById('loading_spinner');
   spinner.classList.toggle('d-none')
+}
+
+// added error message
+const displayError = error => {
+  const errorMessage = document.getElementById('error_message');
+  errorTag.innerText = error;
 }
