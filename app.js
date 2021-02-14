@@ -129,7 +129,7 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
-  toggleSpinner() // call toggleSpinner function
+  // toggleSpinner() // call toggleSpinner function
 })
 
 
